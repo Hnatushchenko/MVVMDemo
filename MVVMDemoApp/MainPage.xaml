@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <ContentControl x:Name="ActiveView" Content="{x:Bind Path=ViewModel.CurrentView, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

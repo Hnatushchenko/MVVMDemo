@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MVVMDemoApp.ViewModels;
+using MVVMDemoApp.Views;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +24,30 @@ namespace MVVMDemoApp
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public MainPageViewModel ViewModel { get; set; }
+
+        private static MainPage _instance;
+        public static MainPage Instance
+        {
+            get
+            {
+                if (_instance is null)
+                {
+                    _instance = new MainPage();
+                }
+                return _instance;
+            }
+            private set
+            {
+                _instance = value;
+            }
+        }
+
         public MainPage()
         {
-            this.InitializeComponent();
+            ViewModel = new MainPageViewModel();
+            InitializeComponent();
+            Instance = this;
         }
     }
 }
