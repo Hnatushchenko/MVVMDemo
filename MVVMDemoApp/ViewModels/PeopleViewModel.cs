@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using MVVMDemoApp.Commands;
 using MVVMDemoApp.Models;
 using MVVMDemoApp.Views;
 using System;
@@ -13,24 +14,11 @@ using Windows.UI.Popups;
 
 namespace MVVMDemoApp.ViewModels
 {
-    public class PeopleViewModel : INotifyCollectionChanged
+    public class PeopleViewModel
     {
         public ObservableCollection<Person> People { get; set; } = new ObservableCollection<Person>();
-
-        public RelayCommand NavigateToAddPersonViewCommand
-        {
-            get
-            {
-                if (_navigateToAddPersonViewCommand is null)
-                {
-                    _navigateToAddPersonViewCommand = new RelayCommand(() =>
-                    {
-                        MainPage.Instance.ViewModel.CurrentView = AddPersonView.Instance;
-                    });
-                }
-                return _navigateToAddPersonViewCommand;
-            }
-        }
+        public ICommand NavigateToAddPersonViewCommand { get; } = new NavigateToAddPersonViewCommand();
+        
         public RelayCommand<Person> DeletePersonCommand
         {
             get
@@ -64,11 +52,8 @@ namespace MVVMDemoApp.ViewModels
             }
         }
 
-        private RelayCommand _navigateToAddPersonViewCommand;
         private RelayCommand<Person> _deletePersonCommand;
         private RelayCommand<Person> _editPersonCommand;
-
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
 
         public PeopleViewModel()
         {
