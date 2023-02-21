@@ -1,0 +1,42 @@
+﻿<UserControl
+    x:Name="PeopleUserControl"
+    x:Class="MVVMDemoApp.Views.PeopleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MVVMDemoApp.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:MVVMDemoApp.Models"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="People List" FontSize="30" HorizontalAlignment="Center" Margin="0 0 0 10"/>
+            <ListView ItemsSource="{x:Bind ViewModel.People}" >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Person">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="0" >
+                                <TextBlock Text="{x:Bind FirstName}" Margin="0 0 5 0"/>
+                                <TextBlock Text="{x:Bind LastName}" />
+                            </StackPanel>
+                            <Button Content="Delete" Grid.Column="2" HorizontalAlignment="Right" Margin="20 0 0 0" Command="{Binding ViewModel.DeletePersonCommand, ElementName=PeopleUserControl}" CommandParameter="{x:Bind}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Content="Add person" Command="{x:Bind ViewModel.NavigateToAddPersonViewCommand}" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
