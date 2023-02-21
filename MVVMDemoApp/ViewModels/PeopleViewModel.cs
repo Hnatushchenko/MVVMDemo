@@ -4,6 +4,7 @@ using MVVMDemoApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using Windows.UI.Popups;
 
 namespace MVVMDemoApp.ViewModels
 {
-    public class PeopleViewModel
+    public class PeopleViewModel : INotifyCollectionChanged
     {
         public ObservableCollection<Person> People { get; set; } = new ObservableCollection<Person>();
 
@@ -47,10 +48,28 @@ namespace MVVMDemoApp.ViewModels
                 return _deletePersonCommand;
             }
         }
+        public RelayCommand<Person> EditPersonCommand
+        {
+            get
+            {
+                if (_editPersonCommand is null)
+                {
+                    _editPersonCommand = new RelayCommand<Person>((person) =>
+                    {
+                        var editPersonView = new EditPersonView(person);
+                        MainPage.Instance.ViewModel.CurrentView = editPersonView;
+                    });
+                }
+                return _editPersonCommand;
+            }
+        }
 
         private RelayCommand _navigateToAddPersonViewCommand;
         private RelayCommand<Person> _deletePersonCommand;
-        
+        private RelayCommand<Person> _editPersonCommand;
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
         public PeopleViewModel()
         {
             People.Add(new Person("John", "Smith"));

@@ -26,12 +26,14 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="0" >
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left" Orientation="Horizontal" Grid.Column="0" >
                                 <TextBlock Text="{x:Bind FirstName}" Margin="0 0 5 0"/>
                                 <TextBlock Text="{x:Bind LastName}" />
                             </StackPanel>
                             <Button Content="Delete" Grid.Column="2" HorizontalAlignment="Right" Margin="20 0 0 0" Command="{Binding ViewModel.DeletePersonCommand, ElementName=PeopleUserControl}" CommandParameter="{x:Bind}"/>
+                            <Button Content="Edit" Grid.Column="3" HorizontalAlignment="Right" Margin="10 0 0 0" Command="{Binding ViewModel.EditPersonCommand, ElementName=PeopleUserControl}" CommandParameter="{x:Bind}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>

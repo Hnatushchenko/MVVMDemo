@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="MVVMDemoApp.Views.AddPersonView"
+    x:Class="MVVMDemoApp.Views.EditPersonView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MVVMDemoApp.Views"
@@ -16,7 +16,7 @@
             <TextBlock Text="Last Name" />
             <TextBox Text="{x:Bind ViewModel.LastName, Mode=TwoWay}" Margin="0 0 0 5"/>
             <Grid>
-                <Button Content="Add" Command="{x:Bind ViewModel.AddPersonCommand}" HorizontalAlignment="Left" />
+                <Button Content="Save" Command="{x:Bind ViewModel.SavePersonCommand}" HorizontalAlignment="Left" />
                 <Button Content="Cancel" Command="{x:Bind ViewModel.NavigateToPeopleViewCommand}" HorizontalAlignment="Right"/>
             </Grid>
         </StackPanel>
