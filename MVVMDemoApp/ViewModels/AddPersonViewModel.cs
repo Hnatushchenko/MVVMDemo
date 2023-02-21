@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Input;
+using MVVMDemoApp.Commands;
 using MVVMDemoApp.Models;
 using MVVMDemoApp.Views;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace MVVMDemoApp.ViewModels
 {
@@ -31,20 +33,9 @@ namespace MVVMDemoApp.ViewModels
                 return _addPersonCommand;
             }
         }
-        public RelayCommand NavigateToPeopleViewCommand
-        {
-            get
-            {
-                if (_navigateToPeopleViewCommand == null)
-                {
-                    _navigateToPeopleViewCommand = new RelayCommand(() =>
-                    {
-                        MainPage.Instance.ViewModel.CurrentView = PeopleView.Instance;
-                    });
-                }
-                return _navigateToPeopleViewCommand;
-            }
-        }
+
+        public ICommand NavigateToPeopleViewCommand { get; private set; } = new NavigateToPeopleViewCommand();
+        
         public string FirstName
         {
             get { return _firstName; }
@@ -59,7 +50,6 @@ namespace MVVMDemoApp.ViewModels
         public event PropertyChangedEventHandler PropertyChanged;
 
         private RelayCommand _addPersonCommand;
-        private RelayCommand _navigateToPeopleViewCommand;
         private string _firstName;
         private string _lastName;
 
