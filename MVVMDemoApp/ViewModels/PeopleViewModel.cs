@@ -27,9 +27,10 @@ namespace MVVMDemoApp.ViewModels
                 {
                     _deletePersonCommand = new RelayCommand<Person>(async (person) =>
                     {
-                        var dialog = new MessageDialog("Are you sure you want to delete this person?", "Delete Person");
-                        dialog.Commands.Add(new UICommand("Yes", new UICommandInvokedHandler((cmd) => People.Remove(person))));
-                        dialog.Commands.Add(new UICommand("No"));
+                        var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
+                        var dialog = new MessageDialog(resourceLoader.GetString("Confirm deleting person dialog message"), resourceLoader.GetString("Delete person"));
+                        dialog.Commands.Add(new UICommand(resourceLoader.GetString("Yes"), new UICommandInvokedHandler((cmd) => People.Remove(person))));
+                        dialog.Commands.Add(new UICommand(resourceLoader.GetString("No")));
                         await dialog.ShowAsync();
                     });
                 }

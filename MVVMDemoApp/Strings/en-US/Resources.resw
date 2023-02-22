@@ -126,6 +126,12 @@
   <data name="Cancel.Content" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Confirm deleting person dialog message" xml:space="preserve">
+    <value>Are you sure you want to delete this person?</value>
+  </data>
+  <data name="Delete person" xml:space="preserve">
+    <value>Delete person</value>
+  </data>
   <data name="Delete.Content" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -138,10 +144,16 @@
   <data name="Last Name.Text" xml:space="preserve">
     <value>Last Name</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="People List.Text" xml:space="preserve">
     <value>People List</value>
   </data>
   <data name="Save.Content" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>
