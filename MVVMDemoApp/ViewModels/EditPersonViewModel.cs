@@ -16,34 +16,7 @@ namespace MVVMDemoApp.ViewModels
 {
     public class EditPersonViewModel : INotifyPropertyChanged
     {
-        public RelayCommand SavePersonCommand
-        {
-            get
-            {
-                if (_savePersonCommand == null)
-                {
-                    _savePersonCommand = new RelayCommand(() =>
-                    {
-                        var people = PeopleView.Instance.ViewModel.People;
-                        _personToEdit.FirstName = FirstName;
-                        _personToEdit.LastName = LastName;
-                        FirstName = LastName = string.Empty;
-                        var indexInList = people.IndexOf(_personToEdit);
-                        if (indexInList == -1)
-                        {
-                            people.Add(_personToEdit);
-                        }
-                        else
-                        {
-                            people[indexInList] = _personToEdit;
-                        }
-                        NavigateToPeopleViewCommand.Execute(null);
-                    },
-                    () => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName));
-                }
-                return _savePersonCommand;
-            }
-        }
+        public RelayCommand SavePersonCommand { get; private set; }
         public ICommand NavigateToPeopleViewCommand { get; set; } = new NavigateToPeopleViewCommand();
 
         public string FirstName
@@ -57,7 +30,28 @@ namespace MVVMDemoApp.ViewModels
             set { _lastName = value; RaisePropertyChanged(); }
         }
 
-        private RelayCommand _savePersonCommand;
+        public EditPersonViewModel()
+        {
+            SavePersonCommand = new RelayCommand(() =>
+            {
+                var people = PeopleView.Instance.ViewModel.People;
+                _personToEdit.FirstName = FirstName;
+                _personToEdit.LastName = LastName;
+                FirstName = LastName = string.Empty;
+                var indexInList = people.IndexOf(_personToEdit);
+                if (indexInList == -1)
+                {
+                    people.Add(_personToEdit);
+                }
+                else
+                {
+                    people[indexInList] = _personToEdit;
+                }
+                NavigateToPeopleViewCommand.Execute(null);
+            },
+            canExecute: () => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName));
+        }
+
         private string _firstName;
         private string _lastName;
         private readonly Person _personToEdit;

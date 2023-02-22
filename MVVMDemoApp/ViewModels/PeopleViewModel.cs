@@ -19,46 +19,29 @@ namespace MVVMDemoApp.ViewModels
         public ObservableCollection<Person> People { get; set; } = new ObservableCollection<Person>();
         public ICommand NavigateToAddPersonViewCommand { get; } = new NavigateToAddPersonViewCommand();
         
-        public RelayCommand<Person> DeletePersonCommand
-        {
-            get
-            {
-                if (_deletePersonCommand is null)
-                {
-                    _deletePersonCommand = new RelayCommand<Person>(async (person) =>
-                    {
-                        var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
-                        var dialog = new MessageDialog(resourceLoader.GetString("Confirm deleting person dialog message"), resourceLoader.GetString("Delete person"));
-                        dialog.Commands.Add(new UICommand(resourceLoader.GetString("Yes"), new UICommandInvokedHandler((cmd) => People.Remove(person))));
-                        dialog.Commands.Add(new UICommand(resourceLoader.GetString("No")));
-                        await dialog.ShowAsync();
-                    });
-                }
-                return _deletePersonCommand;
-            }
-        }
-        public RelayCommand<Person> EditPersonCommand
-        {
-            get
-            {
-                if (_editPersonCommand is null)
-                {
-                    _editPersonCommand = new RelayCommand<Person>((person) =>
-                    {
-                        var editPersonView = new EditPersonView(person);
-                        MainPage.Instance.ViewModel.CurrentView = editPersonView;
-                    });
-                }
-                return _editPersonCommand;
-            }
-        }
-
-        private RelayCommand<Person> _deletePersonCommand;
-        private RelayCommand<Person> _editPersonCommand;
+        public RelayCommand<Person> DeletePersonCommand { get; private set; }
+        public RelayCommand<Person> EditPersonCommand { get; private set; }
 
         public PeopleViewModel()
         {
             People.Add(new Person("John", "Smith"));
+
+            EditPersonCommand = new RelayCommand<Person>(EditPerson);
+            DeletePersonCommand = new RelayCommand<Person>(DeletePerson);
+        }
+
+        private async void DeletePerson(Person person)
+        {
+            var resourceLoader = Windows.ApplicationModel.Resources.ResourceLoader.GetForCurrentView();
+            var dialog = new MessageDialog(resourceLoader.GetString("Confirm deleting person dialog message"), resourceLoader.GetString("Delete person"));
+            dialog.Commands.Add(new UICommand(resourceLoader.GetString("Yes"), new UICommandInvokedHandler((cmd) => People.Remove(person))));
+            dialog.Commands.Add(new UICommand(resourceLoader.GetString("No")));
+            await dialog.ShowAsync();
+        }
+
+        private void EditPerson(Person person)
+        {
+            MainPage.Instance.ViewModel.CurrentView = new EditPersonView(person);
         }
     }
 }

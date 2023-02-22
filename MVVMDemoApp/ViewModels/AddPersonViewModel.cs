@@ -15,25 +15,7 @@ namespace MVVMDemoApp.ViewModels
 {
     public class AddPersonViewModel : INotifyPropertyChanged
     {
-        public RelayCommand AddPersonCommand
-        {
-            get
-            {
-                if (_addPersonCommand == null)
-                {
-                    _addPersonCommand = new RelayCommand(() =>
-                    {
-                        var person = new Person(FirstName, LastName);
-                        PeopleView.Instance.ViewModel.People.Add(person);
-                        FirstName = LastName = string.Empty;
-                        NavigateToPeopleViewCommand.Execute(null);
-                    },
-                    () => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName));
-                }
-                return _addPersonCommand;
-            }
-        }
-
+        public RelayCommand AddPersonCommand { get; private set; }
         public ICommand NavigateToPeopleViewCommand { get; private set; } = new NavigateToPeopleViewCommand();
         
         public string FirstName
@@ -47,9 +29,20 @@ namespace MVVMDemoApp.ViewModels
             set { _lastName = value; RaisePropertyChanged(); }
         }
 
+        public AddPersonViewModel()
+        {
+            AddPersonCommand = new RelayCommand(() =>
+            {
+                var person = new Person(FirstName, LastName);
+                PeopleView.Instance.ViewModel.People.Add(person);
+                FirstName = LastName = string.Empty;
+                NavigateToPeopleViewCommand.Execute(null);
+            },
+            canExecute: () => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName));
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private RelayCommand _addPersonCommand;
         private string _firstName;
         private string _lastName;
 
