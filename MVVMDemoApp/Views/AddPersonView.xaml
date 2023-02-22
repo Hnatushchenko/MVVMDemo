@@ -11,13 +11,13 @@
 
     <Grid>
         <StackPanel MinWidth="200">
-            <TextBlock Text="First Name" />
+            <TextBlock x:Uid="First Name" />
             <TextBox Text="{x:Bind ViewModel.FirstName, Mode=TwoWay}"/>
-            <TextBlock Text="Last Name" />
+            <TextBlock x:Uid="Last Name" />
             <TextBox Text="{x:Bind ViewModel.LastName, Mode=TwoWay}" Margin="0 0 0 5"/>
             <Grid>
-                <Button Content="Add" Command="{x:Bind ViewModel.AddPersonCommand}" HorizontalAlignment="Left" />
-                <Button Content="Cancel" Command="{x:Bind ViewModel.NavigateToPeopleViewCommand}" HorizontalAlignment="Right"/>
+                <Button x:Uid="Add" Command="{x:Bind ViewModel.AddPersonCommand}" HorizontalAlignment="Left" />
+                <Button x:Uid="Cancel" Command="{x:Bind ViewModel.NavigateToPeopleViewCommand}" HorizontalAlignment="Right"/>
             </Grid>
         </StackPanel>
     </Grid>

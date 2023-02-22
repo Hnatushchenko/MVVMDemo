@@ -12,7 +12,7 @@
     d:DesignWidth="400">
     <Grid>
         <StackPanel>
-            <TextBlock Text="People List" FontSize="30" HorizontalAlignment="Center" Margin="0 0 0 10"/>
+            <TextBlock x:Uid="People List" FontSize="30" HorizontalAlignment="Center" Margin="0 0 0 10"/>
             <ListView ItemsSource="{x:Bind ViewModel.People}" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -32,13 +32,13 @@
                                 <TextBlock Text="{x:Bind FirstName}" Margin="0 0 5 0"/>
                                 <TextBlock Text="{x:Bind LastName}" />
                             </StackPanel>
-                            <Button Content="Delete" Grid.Column="2" HorizontalAlignment="Right" Margin="20 0 0 0" Command="{Binding ViewModel.DeletePersonCommand, ElementName=PeopleUserControl}" CommandParameter="{x:Bind}"/>
-                            <Button Content="Edit" Grid.Column="3" HorizontalAlignment="Right" Margin="10 0 0 0" Command="{Binding ViewModel.EditPersonCommand, ElementName=PeopleUserControl}" CommandParameter="{x:Bind}"/>
+                            <Button x:Uid="Delete" Grid.Column="2" HorizontalAlignment="Right" Margin="20 0 0 0" Command="{Binding ViewModel.DeletePersonCommand, ElementName=PeopleUserControl}" CommandParameter="{x:Bind}"/>
+                            <Button x:Uid="Edit" Grid.Column="3" HorizontalAlignment="Right" Margin="10 0 0 0" Command="{Binding ViewModel.EditPersonCommand, ElementName=PeopleUserControl}" CommandParameter="{x:Bind}"/>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Content="Add person" Command="{x:Bind ViewModel.NavigateToAddPersonViewCommand}" HorizontalAlignment="Center" Margin="0 10 0 0"/>
+            <Button x:Uid="Add person" Command="{x:Bind ViewModel.NavigateToAddPersonViewCommand}" HorizontalAlignment="Center" Margin="0 10 0 0"/>
         </StackPanel>
     </Grid>
 </UserControl>
