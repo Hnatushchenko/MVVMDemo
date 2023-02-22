@@ -20,13 +20,13 @@ namespace MVVMDemoApp.ViewModels
         
         public string FirstName
         {
-            get { return _firstName; }
-            set { _firstName = value; RaisePropertyChanged(); }
+            get { return firstName; }
+            set { firstName = value; RaisePropertyChanged(); }
         }
         public string LastName
         {
-            get { return _lastName; }
-            set { _lastName = value; RaisePropertyChanged(); }
+            get { return lastName; }
+            set { lastName = value; RaisePropertyChanged(); }
         }
 
         public AddPersonViewModel()
@@ -43,8 +43,8 @@ namespace MVVMDemoApp.ViewModels
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string _firstName;
-        private string _lastName;
+        private string firstName;
+        private string lastName;
 
         private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {

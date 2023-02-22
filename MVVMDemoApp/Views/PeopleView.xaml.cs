@@ -23,20 +23,20 @@ namespace MVVMDemoApp.Views
     {
         public PeopleViewModel ViewModel { get; set; }
 
-        private static PeopleView _instance;
+        private static PeopleView instance;
         public static PeopleView Instance
         {
             get
             {
-                if (_instance is null)
+                if (instance is null)
                 {
-                    _instance = new PeopleView();
+                    instance = new PeopleView();
                 }
-                return _instance;
+                return instance;
             }
             private set
             {
-                _instance = value;
+                instance = value;
             }
         }
 

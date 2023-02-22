@@ -14,11 +14,11 @@ namespace MVVMDemoApp.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        private object _currentView;
+        private object currentView;
         public object CurrentView
         {
-            get { return _currentView; }
-            set { _currentView = value; RaisePropertyChanged(); }
+            get { return currentView; }
+            set { currentView = value; RaisePropertyChanged(); }
         }
 
         public MainPageViewModel()

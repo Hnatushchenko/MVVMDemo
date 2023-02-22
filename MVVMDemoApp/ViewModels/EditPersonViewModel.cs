@@ -21,13 +21,13 @@ namespace MVVMDemoApp.ViewModels
 
         public string FirstName
         {
-            get { return _firstName; }
-            set { _firstName = value; RaisePropertyChanged(); }
+            get { return firstName; }
+            set { firstName = value; RaisePropertyChanged(); }
         }
         public string LastName
         {
-            get { return _lastName; }
-            set { _lastName = value; RaisePropertyChanged(); }
+            get { return lastName; }
+            set { lastName = value; RaisePropertyChanged(); }
         }
 
         public EditPersonViewModel()
@@ -35,26 +35,26 @@ namespace MVVMDemoApp.ViewModels
             SavePersonCommand = new RelayCommand(() =>
             {
                 var people = PeopleView.Instance.ViewModel.People;
-                _personToEdit.FirstName = FirstName;
-                _personToEdit.LastName = LastName;
+                personToEdit.FirstName = FirstName;
+                personToEdit.LastName = LastName;
                 FirstName = LastName = string.Empty;
-                var indexInList = people.IndexOf(_personToEdit);
+                var indexInList = people.IndexOf(personToEdit);
                 if (indexInList == -1)
                 {
-                    people.Add(_personToEdit);
+                    people.Add(personToEdit);
                 }
                 else
                 {
-                    people[indexInList] = _personToEdit;
+                    people[indexInList] = personToEdit;
                 }
                 NavigateToPeopleViewCommand.Execute(null);
             },
             canExecute: () => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName));
         }
 
-        private string _firstName;
-        private string _lastName;
-        private readonly Person _personToEdit;
+        private string firstName;
+        private string lastName;
+        private readonly Person personToEdit;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -66,7 +66,7 @@ namespace MVVMDemoApp.ViewModels
 
         public EditPersonViewModel(Person personToEdit)
         {
-            _personToEdit = personToEdit;
+            this.personToEdit = personToEdit;
             FirstName = personToEdit.FirstName;
             LastName = personToEdit.LastName;
         }
