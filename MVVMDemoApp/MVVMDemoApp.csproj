@@ -126,6 +126,7 @@
     </Compile>
     <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\RefreshableObservableCollection.cs" />
     <Compile Include="ViewModels\AddPersonViewModel.cs" />
     <Compile Include="ViewModels\EditPersonViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />

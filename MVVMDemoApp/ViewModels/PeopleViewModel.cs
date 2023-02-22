@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MVVMDemoApp.Commands;
 using MVVMDemoApp.Models;
+using MVVMDemoApp.Services;
 using MVVMDemoApp.Views;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace MVVMDemoApp.ViewModels
 {
     public class PeopleViewModel
     {
-        public ObservableCollection<Person> People { get; set; } = new ObservableCollection<Person>();
+        public RefreshableObservableCollection<Person> People { get; set; } = new RefreshableObservableCollection<Person>();
         public ICommand NavigateToAddPersonViewCommand { get; } = new NavigateToAddPersonViewCommand();
         
         public RelayCommand<Person> DeletePersonCommand { get; private set; }

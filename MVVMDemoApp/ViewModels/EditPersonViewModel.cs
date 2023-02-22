@@ -30,28 +30,6 @@ namespace MVVMDemoApp.ViewModels
             set { lastName = value; RaisePropertyChanged(); }
         }
 
-        public EditPersonViewModel()
-        {
-            SavePersonCommand = new RelayCommand(() =>
-            {
-                var people = PeopleView.Instance.ViewModel.People;
-                personToEdit.FirstName = FirstName;
-                personToEdit.LastName = LastName;
-                FirstName = LastName = string.Empty;
-                var indexInList = people.IndexOf(personToEdit);
-                if (indexInList == -1)
-                {
-                    people.Add(personToEdit);
-                }
-                else
-                {
-                    people[indexInList] = personToEdit;
-                }
-                NavigateToPeopleViewCommand.Execute(null);
-            },
-            canExecute: () => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName));
-        }
-
         private string firstName;
         private string lastName;
         private readonly Person personToEdit;
@@ -66,6 +44,16 @@ namespace MVVMDemoApp.ViewModels
 
         public EditPersonViewModel(Person personToEdit)
         {
+            SavePersonCommand = new RelayCommand(() =>
+            {
+                personToEdit.FirstName = FirstName;
+                personToEdit.LastName = LastName;
+                PeopleView.Instance.ViewModel.People.Refresh();
+                FirstName = LastName = string.Empty;
+                NavigateToPeopleViewCommand.Execute(null);
+            },
+            canExecute: () => !string.IsNullOrWhiteSpace(FirstName) && !string.IsNullOrWhiteSpace(LastName));
+
             this.personToEdit = personToEdit;
             FirstName = personToEdit.FirstName;
             LastName = personToEdit.LastName;
