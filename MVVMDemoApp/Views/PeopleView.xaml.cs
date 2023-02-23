@@ -23,28 +23,10 @@ namespace MVVMDemoApp.Views
     {
         public PeopleViewModel ViewModel { get; set; }
 
-        private static PeopleView instance;
-        public static PeopleView Instance
+        public PeopleView(MainPageViewModel mainPageViewModel)
         {
-            get
-            {
-                if (instance is null)
-                {
-                    instance = new PeopleView();
-                }
-                return instance;
-            }
-            private set
-            {
-                instance = value;
-            }
-        }
-
-        public PeopleView()
-        {
-            ViewModel = new PeopleViewModel();
+            ViewModel = new PeopleViewModel(this, mainPageViewModel);
             InitializeComponent();
-            Instance = this;
         }
     }
 }

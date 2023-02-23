@@ -26,28 +26,10 @@ namespace MVVMDemoApp
     {
         public MainPageViewModel ViewModel { get; set; }
 
-        private static MainPage instance;
-        public static MainPage Instance
-        {
-            get
-            {
-                if (instance is null)
-                {
-                    instance = new MainPage();
-                }
-                return instance;
-            }
-            private set
-            {
-                instance = value;
-            }
-        }
-
         public MainPage()
         {
             ViewModel = new MainPageViewModel();
             InitializeComponent();
-            Instance = this;
         }
     }
 }

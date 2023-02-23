@@ -23,7 +23,7 @@ namespace MVVMDemoApp.ViewModels
 
         public MainPageViewModel()
         {
-            CurrentView = new PeopleView();
+            CurrentView = new PeopleView(this);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -21,11 +21,12 @@ namespace MVVMDemoApp.Views
 {
     public sealed partial class EditPersonView : UserControl
     {
-        public EditPersonViewModel ViewModel { get; set; }
+        public PeopleViewModel ViewModel { get; set; }
 
-        public EditPersonView(Person personToEdit)
+        public EditPersonView(PeopleViewModel peopleViewModel)
         {
-            ViewModel = new EditPersonViewModel(personToEdit);
+            ViewModel = peopleViewModel;
+            
             this.InitializeComponent();
         }
     }

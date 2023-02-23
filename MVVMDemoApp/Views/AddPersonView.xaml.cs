@@ -20,30 +20,12 @@ namespace MVVMDemoApp.Views
 {
     public sealed partial class AddPersonView : UserControl
     {
-        public AddPersonViewModel ViewModel { get; set; }
+        public PeopleViewModel ViewModel { get; set; }
 
-        private static AddPersonView instance;
-        public static AddPersonView Instance
+        public AddPersonView(PeopleViewModel peopleViewModel)
         {
-            get
-            {
-                if (instance is null)
-                {
-                    instance = new AddPersonView();
-                }
-                return instance;
-            }
-            private set
-            {
-                instance = value;
-            }
-        }
-
-        public AddPersonView()
-        {
-            ViewModel = new AddPersonViewModel();
+            ViewModel = peopleViewModel;
             this.InitializeComponent();
-            Instance = this;
         }
     }
 }

@@ -17,7 +17,7 @@
             <TextBox Text="{x:Bind ViewModel.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 0 0 5"/>
             <Grid>
                 <Button x:Uid="Add" Command="{x:Bind ViewModel.AddPersonCommand}" HorizontalAlignment="Left" />
-                <Button x:Uid="Cancel" Command="{x:Bind ViewModel.NavigateToPeopleViewCommand}" HorizontalAlignment="Right"/>
+                <Button x:Uid="Cancel" Command="{x:Bind ViewModel.CancelOperationCommand}" HorizontalAlignment="Right"/>
             </Grid>
         </StackPanel>
     </Grid>
